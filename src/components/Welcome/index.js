@@ -1,18 +1,23 @@
+import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { asset, NativeModules } from 'react-360';
 import WelcomeView from './WelcomeView';
+import withSound from '../../sound';
 
-const {AudioModule} = NativeModules;
+const { AudioModule } = NativeModules;
 
+class Welcome extends PureComponent {
+  static propTypes = {
+    onToggleSound: PropTypes.func.isRequired,
+    sound: PropTypes.bool.isRequired,
+  };
 
-export default class Welcome extends PureComponent {
   state = {
     first: true,
-    sound: false,
   };
 
   render() {
-    const { sound } = this.state;
+    const { sound } = this.props;
     return (
       <WelcomeView
         onClick={this.handleClick}
@@ -22,18 +27,19 @@ export default class Welcome extends PureComponent {
   }
 
   handleClick = () => {
+    const { onToggleSound, sound } = this.props;
     const { first } = this.state;
+    onToggleSound();
     if (first) {
-      this.setState({ first: false, sound: true });
+      this.setState({ first: false });
       AudioModule.playEnvironmental({
         source: asset('birds.wav'),
         volume: 1.0,
       });
       return;
     }
-    this.setState(({ sound }) => {
-      AudioModule.setEnvironmentalParams({ muted: sound });
-      return { sound: !sound };
-     });
+    AudioModule.setEnvironmentalParams({ muted: sound });
   };
 };
+
+export default withSound(Welcome);

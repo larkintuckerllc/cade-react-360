@@ -2,12 +2,14 @@ import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { asset, NativeModules } from 'react-360';
 import InfoView from './InfoView';
+import withSound from '../../sound';
 
 const { AudioModule } = NativeModules;
 
-export default class Info extends PureComponent {
+class Info extends PureComponent {
   static propTypes = {
     name: PropTypes.string.isRequired,
+    sound: PropTypes.bool.isRequired,
   };
 
   state = {
@@ -27,9 +29,15 @@ export default class Info extends PureComponent {
   }
 
   handleClick = () => {
+    const { sound } = this.props;
     this.setState(({ open }) => ({ open: !open }));
+    if (!sound) {
+      return;
+    }
     AudioModule.playOneShot({
       source: asset('ray-gun.wav'),
     });
   };
 }
+
+export default withSound(Info);
