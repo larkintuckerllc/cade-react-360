@@ -17,4 +17,14 @@ export default StyleSheet.create({
   greeting: {
     fontSize: 30,
   },
+  soundBox: {
+    marginTop: 20,
+    padding: 20,
+    backgroundColor: '#000000',
+    borderColor: '#639dda',
+    borderWidth: 2,
+  },
+  sound: {
+    fontSize: 30,
+  },
 });
