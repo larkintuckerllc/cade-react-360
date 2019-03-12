@@ -1,23 +1,31 @@
-// This file contains the boilerplate to execute your React app.
-// If you want to modify your application's content, start in "index.js"
+import { ReactInstance, Surface } from 'react-360-web';
 
-import {ReactInstance} from 'react-360-web';
+const SIZE = 300;
 
 function init(bundle, parent, options = {}) {
   const r360 = new ReactInstance(bundle, parent, {
-    // Add custom options here
     fullScreen: true,
     ...options,
   });
 
-  // Render your app content to the default cylinder surface
   r360.renderToSurface(
-    r360.createRoot('cade_react_360', { /* initial props */ }),
+    r360.createRoot('Welcome', {}),
     r360.getDefaultSurface()
   );
 
-  // Load the initial environment
-  r360.compositor.setBackground(r360.getAssetURL('360_world.jpg'));
+  // LIVE OAK
+  const liveOakSurface = new Surface(
+    SIZE,
+    SIZE,
+    Surface.SurfaceShape.Flat,
+  );
+  liveOakSurface.setAngle(Math.PI / 2, 0);
+  r360.renderToSurface(
+    r360.createRoot('Info', { name: 'Live Oak' }),
+    liveOakSurface,
+  );
+
+  r360.compositor.setBackground(r360.getAssetURL('woods.jpg'));
 }
 
 window.React360 = {init};
