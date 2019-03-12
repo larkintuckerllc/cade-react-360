@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import {
   Animated,
-  Text,
   View,
   VrButton,
 } from 'react-360';
