@@ -1,7 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Text, View, VrButton } from 'react-360';
+import { asset, Image, Text, View, VrButton } from 'react-360';
 import styles from './styles';
+
+const onImage = asset('on.png');
+const offImage = asset('off.png');
 
 const WelcomeView = ({ onClick, sound }) => (
   <View style={styles.panel}>
@@ -11,9 +14,7 @@ const WelcomeView = ({ onClick, sound }) => (
       </Text>
     </View>
     <VrButton onClick={onClick} style={styles.soundBox} >
-      <Text style={styles.sound}>
-        { sound ? 'Turn Off Background Sound' : 'Turn On Background Sound' }
-      </Text>
+      <Image source={sound ? onImage : offImage} style={styles.soundImage} />
     </VrButton>
   </View>
 );

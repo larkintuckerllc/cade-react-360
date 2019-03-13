@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import {
   Animated,
+  Text,
   View,
   VrButton,
 } from 'react-360';
@@ -15,39 +16,53 @@ export default class InfoView extends Component {
   };
 
   state = {
-    fade: new Animated.Value(0),
+    fadeButton: new Animated.Value(1),
+    fadeText: new Animated.Value(0),
   };
 
   componentDidUpdate() {
     const { open } = this.props;
-    const value = open ? 1 : 0;
+    const valueText = open ? 1 : 0;
+    const valueButton = open ? 0.6 : 1;
     Animated.timing(
-      this.state.fade,
+      this.state.fadeText,
       {
-        toValue: value,
-        duration: 3000,
+        toValue: valueText,
+        duration: 1000,
       }
     ).start();  
+    Animated.timing(
+      this.state.fadeButton,
+      {
+        toValue: valueButton,
+        duration: 1000,
+      }
+    ).start(); 
   }
 
   render() {
-    const { name, onClick, open } = this.props;
-    const { fade } = this.state;
+    const { name, onClick } = this.props;
+    const { fadeButton, fadeText } = this.state;
     return (
       <View style={styles.root}>
-        <Animated.Text style={[
-          styles.rootText,
-          { opacity: fade }
-        ]}>
-          {name}
-        </Animated.Text>
-        <VrButton
+        <Animated.View
           style={[
-            styles.rootButton,
-            { backgroundColor: open ? 'red': 'green' },
+            styles.rootInfo,
+            { opacity: fadeText }
           ]}
-          onClick={onClick}
-        />
+        >
+          <Text style={styles.rootInfoText}>
+            {name}
+          </Text>
+        </Animated.View>
+        <Animated.View style={{
+          opacity: fadeButton,
+        }}>
+          <VrButton
+            style={styles.rootButton}
+            onClick={onClick}
+          />
+        </Animated.View>
       </View>
     );
   }

@@ -19,7 +19,7 @@ function init(bundle, parent, options = {}) {
     SIZE,
     Surface.SurfaceShape.Flat,
   );
-  liveOakSurface.setAngle(Math.PI / 2, 0);
+  liveOakSurface.setAngle(Math.PI / 2.5, 0);
   r360.renderToSurface(
     r360.createRoot('Info', { name: 'Live Oak' }),
     liveOakSurface,

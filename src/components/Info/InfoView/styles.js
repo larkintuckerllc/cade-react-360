@@ -8,7 +8,11 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
   },
-  rootText: {
+  rootInfo: {
+    backgroundColor: 'white',
+    padding: 20,
+  },
+  rootInfoText: {
     color: 'black',
     fontSize: 60,
     fontWeight: 'bold',
@@ -16,6 +20,7 @@ export default StyleSheet.create({
   rootButton: {
     width: 100,
     height: 100,
+    backgroundColor: '#639dda',
     borderRadius: 100 / 2,
     borderWidth: 0,
   }

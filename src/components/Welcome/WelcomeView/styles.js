@@ -19,12 +19,12 @@ export default StyleSheet.create({
   },
   soundBox: {
     marginTop: 20,
-    padding: 20,
-    backgroundColor: '#000000',
-    borderColor: '#639dda',
-    borderWidth: 2,
   },
   sound: {
     fontSize: 30,
+  },
+  soundImage: {
+    height: 100,
+    width: 100,
   },
 });
